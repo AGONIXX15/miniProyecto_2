@@ -6,11 +6,6 @@ import java.util.Arrays;
 
 public class Pokemon {
 
-    public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[91m";
-    public static final String WHITE_BOLD = "\u001B[1;97m";
-    public static final String GREEN = "\u001B[32m";
-
     private String name;
     private TypePokemon type;
     private Attack[] attacks;
@@ -88,7 +83,7 @@ public class Pokemon {
 
         for (Attack attack : attacks) {
             if (attack != null) {
-                sb.append(RED + "\n  • "+WHITE_BOLD).append(attack.getName())
+                sb.append("\n  • ").append(attack.getName())
                         .append(" (").append(attack.getPower())
                         .append(" de poder, tipo: ").append(attack.getTypeDamage()).append(")");
             }
@@ -100,15 +95,15 @@ public class Pokemon {
     }
     public void cure(int health){
         this.health = Math.min(this.health + health, this.healthMax);
-        System.out.printf(GREEN+"%s"+WHITE_BOLD + " Ha sido curado hasta %d\n"+RESET, this.name, this.health);
+        System.out.printf("%s" + " Ha sido curado hasta %d\n", this.name, this.health);
     }
 
     public void takeDamage(int damage) {
         health = Math.max(0, health-damage);
-        System.out.printf(GREEN+"%s"+WHITE_BOLD + " Recibio %d de daño \n"+RESET, name, damage);
-        System.out.printf(GREEN+"%s"+WHITE_BOLD + " Tiene una vida de %d/%d \n"+RESET, name, health, healthMax);
+        System.out.printf("%s" + " Recibio %d de daño \n", name, damage);
+        System.out.printf("%s" + " Tiene una vida de %d/%d \n", name, health, healthMax);
         if (health == 0){
-            System.out.printf(GREEN + "%s"+WHITE_BOLD + " Ha sido derrotado...\n"+RESET, name);
+            System.out.printf("%s" + " Ha sido derrotado...\n", name);
         }
     }
 
@@ -128,10 +123,10 @@ public class Pokemon {
     public void makeDamage(Pokemon enemy, Attack attack){
         float advantage = (hasAdvantage(enemy)) ? 1.3f : 1;
         if(advantage > 1){
-            System.out.println(WHITE_BOLD + "El ataque ha sido efectivo!!"+RESET);
+            System.out.println("El ataque ha sido efectivo!!");
         }
         int damage = (int) (advantage * attack.getPower());
-        System.out.printf(WHITE_BOLD + "%s realizo %s hacia %s con un daño de %d\n",name, attack.getName(), enemy.getName(),damage);
+        System.out.printf("%s realizo %s hacia %s con un daño de %d\n",name, attack.getName(), enemy.getName(),damage);
         enemy.takeDamage(damage);
     }
 
