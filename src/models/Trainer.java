@@ -10,11 +10,6 @@ import java.util.Scanner;
  */
 
 public class Trainer {
-
-    public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[91m";
-    public static final String WHITE_BOLD = "\u001B[1;97m";
-    public static final String GREEN = "\u001B[32m";
     /**
      * atributos: NombreEntrenador,Equipo
      */
@@ -33,9 +28,6 @@ public class Trainer {
         this.nameTrainer = nameTrainer;
         this.team = new Pokemon[3];
     }
-    public Pokemon[] getTeamArray() {
-        return team;
-    }
 
     public String getNameTrainer() {
         return nameTrainer;
@@ -45,16 +37,12 @@ public class Trainer {
         this.nameTrainer = nameTrainer;
     }
 
-    public String getTeam() {
-        StringBuilder sb = new StringBuilder();
+    public void getTeam() {
+        System.out.println("Tu equipo de batalla es: ");
         for (int i = 0; i < team.length; i++) {
-            if (team[i] != null) {
-                sb.append(team[i].showInfo()).append("\n");
-            }
+            System.out.println(team[i].showInfo());
         }
-        return sb.toString();
     }
-
 
     public void setTeam(Pokemon[] team) {
         this.team = team;
@@ -67,7 +55,7 @@ public class Trainer {
         for (int i = 0; i < pokemons.length; i++) {
 
             if (pokemons[i] != null) {
-                System.out.printf(WHITE_BOLD + "%d. %s \n", i + 1, pokemons[i].showInfo());
+                System.out.printf("%d. %s \n", i + 1, pokemons[i].showInfo());
             }
         }
         System.out.print("Selecciona tu equipo de batalla (3 pokemons): ");
