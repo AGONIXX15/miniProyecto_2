@@ -5,7 +5,8 @@ public enum TypePokemon {
     FUEGO(new String[]{"PLANTA"}),
     AGUA(new String[]{"FUEGO"}),
     PLANTA(new String[]{"PLANTA"}),
-    VOLADOR(new String[]{"PLANTA"});
+    VOLADOR(new String[]{"PLANTA"})
+    ;
 
     public String[] strong;
     TypePokemon(String[] strong) {

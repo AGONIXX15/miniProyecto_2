@@ -18,72 +18,73 @@ public class PokemonFactory {
     public static Pokemon[] loadAvailablePokemons() {
         return new Pokemon[]{
                 new Pokemon("Charmander", 100, TypePokemon.FUEGO, new Attack[]{
-                        Attack.FLAMETHROWER, Attack.FIRE_BLAST, Attack.TACKLE, Attack.DOUBLE_KICK
-                }),
+                        AttackFactory.FLAMETHROWER, AttackFactory.FIRE_BLAST, AttackFactory.TACKLE, AttackFactory.DOUBLE_KICK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"),
+
                 new Pokemon("Squirtle", 100, TypePokemon.AGUA, new Attack[]{
-                        Attack.WATER_GUN, Attack.TACKLE, Attack.DOUBLE_KICK, Attack.QUICK_ATTACK
-                }),
+                        AttackFactory.WATER_GUN, AttackFactory.TACKLE, AttackFactory.DOUBLE_KICK, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png"),
+
                 new Pokemon("Bulbasaur", 100, TypePokemon.PLANTA, new Attack[]{
-                        Attack.VINE_WHIP, Attack.SOLAR_BEAM, Attack.RAZOR_LEAF, Attack.TACKLE
-                }),
+                        AttackFactory.VINE_WHIP, AttackFactory.SOLAR_BEAM, AttackFactory.RAZOR_LEAF, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
+
                 new Pokemon("Pikachu", 90, TypePokemon.ELECTRICO, new Attack[]{
-                        Attack.THUNDERBOLT, Attack.THUNDER, Attack.SHOCK_WAVE, Attack.QUICK_ATTACK
-                }),
+                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"),
+
                 new Pokemon("Arcanine", 110, TypePokemon.FUEGO, new Attack[]{
-                        Attack.FIRE_BLAST, Attack.FLAMETHROWER, Attack.QUICK_ATTACK, Attack.TACKLE
-                }),
+                        AttackFactory.FIRE_BLAST, AttackFactory.FLAMETHROWER, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png"),
+
                 new Pokemon("Scyther", 100, TypePokemon.PLANTA, new Attack[]{
-                        Attack.LEAF_BLADE, Attack.SLASH, Attack.DOUBLE_KICK, Attack.TACKLE
-                }),
+                        AttackFactory.LEAF_BLADE, AttackFactory.SLASH, AttackFactory.DOUBLE_KICK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"),
+
                 new Pokemon("Electabuzz", 95, TypePokemon.ELECTRICO, new Attack[]{
-                        Attack.THUNDERBOLT, Attack.THUNDER, Attack.SHOCK_WAVE, Attack.QUICK_ATTACK
-                })
+                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png"),
 
-        };
-    }
+                new Pokemon("Vulpix", 90, TypePokemon.FUEGO, new Attack[]{
+                        AttackFactory.FLAMETHROWER, AttackFactory.FIRE_BLAST, AttackFactory.TACKLE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png"),
 
-    public static Pokemon createPokemonFromZero() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print(WHITE_BOLD + "Nombre del Pokémon: " + RESET);
-        String namePokemon = sc.nextLine();
+                new Pokemon("Magmar", 105, TypePokemon.FUEGO, new Attack[]{
+                        AttackFactory.FIRE_BLAST, AttackFactory.FLAMETHROWER, AttackFactory.SLASH, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/126.png"),
 
-        System.out.print(WHITE_BOLD + "Salud: " + RESET);
-        int salud = Integer.parseInt(sc.nextLine());
+                new Pokemon("Psyduck", 95, TypePokemon.AGUA, new Attack[]{
+                        AttackFactory.WATER_GUN, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE, AttackFactory.DOUBLE_KICK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png"),
 
-        System.out.println(WHITE_BOLD + "Tipo de Pokémon:"+ RESET);
-        for (TypePokemon type : TypePokemon.values()) {
-            System.out.println(WHITE_BOLD + type);
-        }
-        System.out.print(WHITE_BOLD + "Elige el tipo: " + RESET);
-        TypePokemon typepokemon = TypePokemon.valueOf(sc.nextLine().toUpperCase());
+                new Pokemon("Seel", 100, TypePokemon.AGUA, new Attack[]{
+                        AttackFactory.WATER_GUN, AttackFactory.SLASH, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/86.png"),
 
-        Attack[] attacks = new Attack[4];
-        System.out.println(WHITE_BOLD + "Crea los ataques para tu pokemon "+ GREEN +namePokemon+RESET+"(4 ataques):");
-        for (int i = 0; i < attacks.length; i++) {
-            System.out.println(WHITE_BOLD + "----- Ataque " + (i + 1) + " -----" + RESET);
-            System.out.print(WHITE_BOLD + "Nombre del ataque: " + RESET);
-            String nameAttack = sc.nextLine();
+                new Pokemon("Bellsprout", 85, TypePokemon.PLANTA, new Attack[]{
+                        AttackFactory.VINE_WHIP, AttackFactory.SOLAR_BEAM, AttackFactory.TACKLE, AttackFactory.RAZOR_LEAF
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/69.png"),
 
-            System.out.print(WHITE_BOLD + "Poder del ataque: " + RESET  );
-            short power = (short) Integer.parseInt(sc.nextLine());
+                new Pokemon("Exeggcute", 95, TypePokemon.PLANTA, new Attack[]{
+                        AttackFactory.RAZOR_LEAF, AttackFactory.VINE_WHIP, AttackFactory.SOLAR_BEAM, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/102.png"),
 
+                new Pokemon("Magnemite", 90, TypePokemon.ELECTRICO, new Attack[]{
+                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png"),
 
-            System.out.println(WHITE_BOLD + "Tipo de daño del ataque:" + RESET);
-            TypeDamage[] type = TypeDamage.values();
-            for (int j = 0; j < type.length; j++) {
-                System.out.println((j + 1) + ". " + type[j]);
-            }
-            System.out.print(WHITE_BOLD + "Elige una opción (número): " + RESET);
-            int optionType = Integer.parseInt(sc.nextLine());
-            TypeDamage typeAttack = type[optionType - 1];
+                new Pokemon("Jolteon", 110, TypePokemon.ELECTRICO, new Attack[]{
+                        AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK, AttackFactory.SLASH
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png"),
 
-            attacks[i] = new Attack(nameAttack, power, typeAttack);
-        }
+                new Pokemon("Doduo", 90, TypePokemon.VOLADOR, new Attack[]{
+                        AttackFactory.SLASH, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE, AttackFactory.DOUBLE_KICK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/84.png"),
 
-
-        return new Pokemon(namePokemon, salud, typepokemon, attacks);
-    }
+                new Pokemon("Farfetch'd", 95, TypePokemon.VOLADOR, new Attack[]{
+                        AttackFactory.SLASH, AttackFactory.LEAF_BLADE, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/83.png")};
+    }}
 
 
 
-}

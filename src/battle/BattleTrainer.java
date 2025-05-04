@@ -2,7 +2,7 @@ package battle;
 
 import models.Trainer;
 import models.pokemon.Pokemon;
-import view.PokemonMenu;
+//import view.PokemonMenu;
 
 import java.util.Scanner;
 
@@ -36,7 +36,7 @@ public class BattleTrainer {
         boolean condition;
         int index;
         do {
-            PokemonMenu.showAllPokemonsAlive(trainer.team);
+           // PokemonMenu.showAllPokemonsAlive(trainer.team);
             System.out.println(GREEN + trainer.getNameTrainer() + WHITE_BOLD + " Escoje un pokemon de tu equipo para comenzar a luchar: "+ RESET);
             index = Integer.parseInt(sc.nextLine())-1;
             condition = !(index >= 0 && index < trainer.team.length && trainer.team[index].isAlive());

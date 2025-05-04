@@ -3,7 +3,7 @@ package battle;
 import models.Trainer;
 import models.pokemon.Pokemon;
 import models.pokemon.utils.Attack;
-import view.PokemonMenu;
+//import view.PokemonMenu;
 
 import java.util.Scanner;
 
@@ -30,7 +30,7 @@ public class BattlePokemon {
         boolean condition = false;
         int index;
         do {
-            PokemonMenu.showPokemonAttacks(pokemon);
+           // PokemonMenu.showPokemonAttacks(pokemon);
             index = Integer.parseInt(sc.nextLine())-1;
             condition = !(index >= 0 && index < pokemon.getAttacks().length);
             if(condition){
