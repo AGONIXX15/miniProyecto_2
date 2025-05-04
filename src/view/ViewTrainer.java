@@ -27,6 +27,11 @@ public class ViewTrainer extends JFrame {
     public ViewTrainer() {
         setTitle("Seleccionar Entrenadores");
 
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 16));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 14));
+        UIManager.put("Button.background", new Color(205, 64, 64));
+        UIManager.put("Button.foreground", Color.WHITE);
+
         ImageIcon fondoIcon,fondoBotonSeleccionar,fondoBotonAsignar,fondoBotonBatalla;
 
         fondoIcon = new ImageIcon("src/models/pokemon/utils/images/fondoSeleccion.png");
@@ -138,10 +143,7 @@ public class ViewTrainer extends JFrame {
 
 
     public void mostrarEquipo() {
-        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 16));
-        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 14));
-        UIManager.put("Button.background", new Color(205, 64, 64));
-        UIManager.put("Button.foreground", Color.WHITE);
+
 
         HashMap<String, Integer> pokedex = new HashMap<>();
         pokedex.put("Charmander", 4);
