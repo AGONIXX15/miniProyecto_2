@@ -4,19 +4,17 @@ import models.pokemon.Pokemon;
 import models.pokemon.utils.Attack;
 import models.pokemon.utils.TypeDamage;
 import models.pokemon.utils.TypePokemon;
+import view.MainFrame;
+
 import utils.PokemonFactory;
 //import view.Menu;
 
 
-public class
-Main {
+import javax.swing.SwingUtilities;
+
+public class Main {
     public static void main(String[] args) {
-        PokemonFactory pokemonFactory = new PokemonFactory();
-
-
-Trainer trainer = new Trainer("sebas",pokemonFactory.loadAvailablePokemons());
-trainer.randomTeam();
-trainer.getTeam();
+        MainFrame mainFrame = new MainFrame();
     }
 }
 
