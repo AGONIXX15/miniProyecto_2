@@ -1,13 +1,18 @@
 package view;
 
+import models.pokemon.utils.ReproduceSound;
 import utils.CustomFont;
 
 import javax.swing.*;
 import java.awt.*;
 
+import static view.ViewTrainer.StartSelectTrainerTeam;
+
 public class MainFrame extends JFrame {
+   static ReproduceSound reproduceSound;
 
     public MainFrame() {
+
 
         setTitle("Batalla Pokémon");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -47,14 +52,9 @@ public class MainFrame extends JFrame {
         begin.setPreferredSize(new Dimension(imageHome.getIconWidth(), imageHome.getIconHeight()));
 
         begin.addActionListener(e -> {
-            JLabel prueba = new JLabel("ESTA FUNCION AUN NO ESTA CREADA! Ten paciencia");
-            prueba.setFont(CustomFont.loadfont(30f));
-            prueba.setAlignmentX(Component.CENTER_ALIGNMENT);
-            prueba.setBackground(Color.WHITE);
-            prueba.setForeground(Color.WHITE);
-            panel.add(prueba);
-            panel.revalidate(); // Actualiza el layout
-            panel.repaint();
+            StartSelectTrainerTeam ();
+            setVisible(false);
+
         });
 
 
@@ -88,6 +88,10 @@ public class MainFrame extends JFrame {
 
 
         setVisible(true); // Hace visible la ventana
+
+        reproduceSound= new ReproduceSound();
+        reproduceSound.loadSound("src/models/pokemon/utils/Voicy_Pokemon GO Original Sounds_ GOCHA.wav");
+        reproduceSound.playSound();
     }
 
 

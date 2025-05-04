@@ -1,6 +1,7 @@
 package view;
 import models.Trainer;
 import models.pokemon.utils.ReproduceSound;
+import utils.CustomFont;
 import utils.PokemonFactory;
 import javax.imageio.ImageIO;
 import java.net.URL;
@@ -44,24 +45,30 @@ public class ViewTrainer extends JFrame {
 
         // Labels y TextFields
         textoBienvenida = new JLabel("Ingresa los entrenadores y selecciona equipos");
-        textoBienvenida.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-        textoBienvenida.setBounds(500, 10, 600, 50);
+
+        textoBienvenida.setFont(CustomFont.loadfont(55f));
+        textoBienvenida.setForeground(Color.WHITE);
+        textoBienvenida.setBounds(280, 10, 1500, 50);
         fondo.add(textoBienvenida);
 
         entrenador1 = new JLabel("Entrenador 1:");
-        entrenador1.setBounds(300, 300, 100, 20);
+        entrenador1.setFont(CustomFont.loadfont(40f));
+        entrenador1.setForeground(Color.BLACK);
+        entrenador1.setBounds(300, 300, 400, 30);
         fondo.add(entrenador1);
 
         entrenador1Texto = new TextField();
-        entrenador1Texto.setBounds(250, 350, 300, 50);
+        entrenador1Texto.setBounds(250, 350, 300, 30);
         fondo.add(entrenador1Texto);
 
         entrenador2 = new JLabel("Entrenador 2:");
-        entrenador2.setBounds(1000, 300, 100, 20);
+        entrenador2.setFont(CustomFont.loadfont(40f));
+        entrenador2.setForeground(Color.BLACK);
+        entrenador2.setBounds(950, 300, 400, 30);
         fondo.add(entrenador2);
 
         entrenador2Texto = new TextField();
-        entrenador2Texto.setBounds(900, 350, 300, 50);
+        entrenador2Texto.setBounds(900, 350, 300, 30);
         fondo.add(entrenador2Texto);
 
         // Botones
@@ -101,6 +108,7 @@ public class ViewTrainer extends JFrame {
         iniciarBatalla.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(entreadoresIntroduccidos && asignacionDeEquipos) {
+                    MainFrame.reproduceSound.stopSound(); // parar sonido de inicio
                     ReproduceSound reproduceSound = new ReproduceSound();
                     reproduceSound.loadSound("src/models/pokemon/utils/ready-fight-37973.wav");
                     reproduceSound.playSound();
@@ -176,7 +184,7 @@ public class ViewTrainer extends JFrame {
             JPanel panel1 = new JPanel();
 
             panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
-            JLabel textoEquipo =new JLabel("Equipo de perra" + trainer1.getNameTrainer() + ":");
+            JLabel textoEquipo =new JLabel("Equipo de " + trainer1.getNameTrainer() + ":");
             textoEquipo.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
             panel1.add(textoEquipo);
         for (models.pokemon.Pokemon p : trainer1.getTeamArray()) {
