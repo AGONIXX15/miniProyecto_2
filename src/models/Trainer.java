@@ -33,6 +33,9 @@ public class Trainer {
         this.nameTrainer = nameTrainer;
         this.team = new Pokemon[3];
     }
+    public Pokemon[] getTeamArray() {
+        return team;
+    }
 
     public String getNameTrainer() {
         return nameTrainer;
@@ -42,12 +45,16 @@ public class Trainer {
         this.nameTrainer = nameTrainer;
     }
 
-    public void getTeam() {
-        System.out.println(WHITE_BOLD + "Tu equipo de batalla es: ");
+    public String getTeam() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < team.length; i++) {
-            System.out.println(team[i].showInfo());
+            if (team[i] != null) {
+                sb.append(team[i].showInfo()).append("\n");
+            }
         }
+        return sb.toString();
     }
+
 
     public void setTeam(Pokemon[] team) {
         this.team = team;

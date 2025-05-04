@@ -16,6 +16,7 @@ public class Pokemon {
     private Attack[] attacks;
     private int healthMax;
     private int health;
+    public String imagenUrl;
 
 
 
@@ -28,16 +29,19 @@ public class Pokemon {
      * @param type    tipo del pokemon
      * @param attacks ataques del pokemon
      */
-    public Pokemon(String name, int healthMax, TypePokemon type, Attack[] attacks) {
+    public Pokemon(String name, int healthMax, TypePokemon type, Attack[] attacks, String imagenUrl) {
         this.name = name;
         this.healthMax = healthMax;
         this.health = healthMax;
         this.type = type;
         this.attacks = attacks;
+        this.imagenUrl = imagenUrl;
     }
 
 
-
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
 
     public String getName() {
         return name;
@@ -83,16 +87,17 @@ public class Pokemon {
         StringBuilder sb = new StringBuilder();
         sb.append("Nombre = ").append(name)
                 .append(", Tipo = ").append(type)
-                .append(", Salud = ").append(health)
-                .append("\nAtaques:");
+                .append(", Salud = ").append(health);
 
-        for (Attack attack : attacks) {
+
+        /*for (Attack attack : attacks) {
             if (attack != null) {
                 sb.append(RED + "\n  • "+WHITE_BOLD).append(attack.getName())
                         .append(" (").append(attack.getPower())
                         .append(" de poder, tipo: ").append(attack.getTypeDamage()).append(")");
             }
-        }
+         */
+
 
         return sb.toString();
 
@@ -144,7 +149,7 @@ public class Pokemon {
     }
 
     public Pokemon clonar(){
-        return new Pokemon(name, healthMax, type, attacks);
+        return new Pokemon(name, healthMax, type, attacks,imagenUrl);
     }
 }
 
