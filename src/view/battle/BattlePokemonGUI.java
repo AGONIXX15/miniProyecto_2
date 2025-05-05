@@ -125,6 +125,15 @@ public class BattlePokemonGUI extends JFrame {
     }
 
     public void chooseTrainerPokemon() {
+        if(BattleTrainer.trainerHasLost(trainer1)){
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            setVisible(false);
+            return;
+        }
+        if (BattleTrainer.trainerHasLost(trainer2)){
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            setVisible(false);
+        }
         if (!trainer1Active){
             pokemon2 = trainer2.getTeamArray()[((ShowPokemons) p1.getComponent(1)).getChoose()];
             System.out.println(pokemon2);
@@ -265,4 +274,39 @@ public class BattlePokemonGUI extends JFrame {
     public void combat(){
     }
 
+    public static void main(String[] args) {
+        Pokemon []pokemon1 = new Pokemon[]{
+                new Pokemon("Bulbasaur", 100, TypePokemon.PLANTA, new Attack[]{
+                        AttackFactory.VINE_WHIP, AttackFactory.SOLAR_BEAM, AttackFactory.RAZOR_LEAF, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
+
+                new Pokemon("Pikachu", 90, TypePokemon.ELECTRICO, new Attack[]{
+                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"),
+
+                new Pokemon("Arcanine", 110, TypePokemon.FUEGO, new Attack[]{
+                        AttackFactory.FIRE_BLAST, AttackFactory.FLAMETHROWER, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png")
+        };
+
+        Pokemon []pokemon2 = new Pokemon[]{
+                new Pokemon("Scyther", 100, TypePokemon.PLANTA, new Attack[]{
+                        AttackFactory.LEAF_BLADE, AttackFactory.SLASH, AttackFactory.DOUBLE_KICK, AttackFactory.TACKLE
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"),
+
+                new Pokemon("Electabuzz", 95, TypePokemon.ELECTRICO, new Attack[]{
+                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png"),
+
+                new Pokemon("Vulpix", 90, TypePokemon.FUEGO, new Attack[]{
+                        AttackFactory.FLAMETHROWER, AttackFactory.FIRE_BLAST, AttackFactory.TACKLE, AttackFactory.QUICK_ATTACK
+                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png"),
+        };
+        Trainer trainer1 = new Trainer("sebas", pokemon1);
+        trainer1.randomTeam();
+        Trainer trainer2 = new Trainer("simon", pokemon2);
+        trainer2.randomTeam();
+        new BattlePokemonGUI(trainer1, trainer2);
+
+    }
 }
