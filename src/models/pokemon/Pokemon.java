@@ -2,6 +2,8 @@ package models.pokemon;
 
 import models.pokemon.utils.Attack;
 import models.pokemon.utils.TypePokemon;
+import view.battle.BattlePokemonGUI;
+
 import java.util.Arrays;
 
 public class Pokemon {
@@ -105,10 +107,10 @@ public class Pokemon {
 
     public void takeDamage(int damage) {
         health = Math.max(0, health-damage);
-        System.out.printf("%s" + " Recibio %d de daño \n", name, damage);
-        System.out.printf("%s" + " Tiene una vida de %d/%d \n", name, health, healthMax);
+        BattlePokemonGUI.getInstance().putMessage(String.format("%s Recibio %d de daño \n", name, damage));
+        BattlePokemonGUI.getInstance().putMessage(String.format("%s Tiene una vida de %d/%d \n", name, health, healthMax));
         if (health == 0){
-            System.out.printf("%s" + " Ha sido derrotado...\n", name);
+            BattlePokemonGUI.getInstance().putMessage(String.format("%s Ha sido derrotado...\n", name));
         }
     }
 
@@ -128,10 +130,10 @@ public class Pokemon {
     public void makeDamage(Pokemon enemy, Attack attack){
         float advantage = (hasAdvantage(enemy)) ? 1.3f : 1;
         if(advantage > 1){
-            System.out.println("El ataque ha sido efectivo!!");
+            BattlePokemonGUI.getInstance().putMessage("El ataque ha sido efectivo!!");
         }
         int damage = (int) (advantage * attack.getPower());
-        System.out.printf("%s realizo %s hacia %s con un daño de %d\n",name, attack.getName(), enemy.getName(),damage);
+        BattlePokemonGUI.getInstance().putMessage(String.format("%s realizo %s hacia %s con un daño de %d\n",name, attack.getName(), enemy.getName(), damage));
         enemy.takeDamage(damage);
     }
 
