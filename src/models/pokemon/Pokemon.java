@@ -80,6 +80,8 @@ public class Pokemon {
     }
 
 
+
+
     public void setAttacks(Attack[] attacks) {
         this.attacks = attacks;
     }
