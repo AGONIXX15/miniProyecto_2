@@ -25,18 +25,11 @@ public class BattlePokemon {
         if(pokemon1.isAlive()){
             BattlePokemonGUI.getInstance().putMessage(String.format("%s Gano la batalla pokemonn!\n", pokemon1.getName()));
             result = true;
-        } else {
-            BattlePokemonGUI.getInstance().putMessage(String.format("%s Perdio la batalla pokemon!\n", pokemon1.getName()));
+        }else{
+            BattlePokemonGUI.getInstance().putMessage(String.format("%s Gano la batalla pokemonn!\n", pokemon2.getName()));
             result = true;
         }
 
-        if(pokemon2.isAlive()){
-            BattlePokemonGUI.getInstance().putMessage(String.format("%s Gano la batalla pokemonn!\n", pokemon2.getName()));
-            result = true;
-        } else  {
-            BattlePokemonGUI.getInstance().putMessage(String.format("%s Perdio la batalla pokemon!\n", pokemon2.getName()));
-            result = true;
-        }
         return result;
     }
 }
