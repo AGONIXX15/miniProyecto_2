@@ -2,6 +2,8 @@ package view.battle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 public class MessageBattle extends JPanel {
@@ -9,7 +11,9 @@ public class MessageBattle extends JPanel {
     private String fullMessage = null;
     private CardLayout card;
     private int charIndex = 0;
-    final private int speed = 60;
+    final private int speed = 15;
+    private Queue<String> messageQueue = new LinkedList<>();
+    private boolean isShowingMessage = false;
 
     /**
      * este es el constructor de la clase de mensajes para nuestro juego
@@ -28,41 +32,59 @@ public class MessageBattle extends JPanel {
         add(new JPanel(), "vacio");
     }
 
-    public CardLayout getCard() {
-        return card;
+    public void enqueueMessage(String newMessage) {
+        messageQueue.add(newMessage);
+        if (!isShowingMessage) {
+            showNextMessage();
+        }
     }
 
-    /**
-     * escribe un mensaje en el area de texto lentamente con un efecto que lo hace
-     * parecer de un juego viejo
-     * @param newMessage el nuevo mensaje que se va a enviar al area de texto
-     */
-    public void setMessage(String newMessage) {
-        this.fullMessage = newMessage;
+    private void showNextMessage() {
+        if (messageQueue.isEmpty()) {
+            isShowingMessage = false;
+            return;
+        }
+
+        isShowingMessage = true;
+        fullMessage = messageQueue.poll();
         textArea.setText("");
-        this.charIndex = 0;
-        Timer timer = new Timer(speed,  e -> {
+        charIndex = 0;
+
+        Timer timer = new Timer(speed, e -> {
             if (charIndex < fullMessage.length()) {
                 textArea.append(String.valueOf(fullMessage.charAt(charIndex)));
                 charIndex++;
             } else {
                 ((Timer) e.getSource()).stop();
+                // Espera un poco antes de mostrar el siguiente mensaje
+                new Timer(200, evt -> {
+                    ((Timer) evt.getSource()).stop();
+                    showNextMessage();
+                }).start();
             }
         });
         timer.start();
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Mensaje Pokémon");
-        frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
-        MessageBattle message = new MessageBattle();
-        frame.add(message, BorderLayout.CENTER);
-        PokemonStatusBar barra = new PokemonStatusBar("pikachu", 100, 100);
-        message.setMessage("simon sos una zunga sapa hp");
-        frame.add(barra, BorderLayout.SOUTH);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    public CardLayout getCard() {
+        return card;
     }
+
+
+
+
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("Mensaje Pokémon");
+//        frame.setLayout(new BorderLayout());
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setSize(400, 200);
+//        MessageBattle message = new MessageBattle();
+//        frame.add(message, BorderLayout.CENTER);
+//        PokemonStatusBar barra = new PokemonStatusBar("pikachu", 100, 100);
+//        message.enqueueMessage("mensaje de prueba");
+//        frame.add(barra, BorderLayout.SOUTH);
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+ //   }
+
 }
