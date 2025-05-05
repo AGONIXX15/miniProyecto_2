@@ -28,7 +28,7 @@ public class ShowPokemons extends JScrollPane {
             pokemonPanel.setPreferredSize(new Dimension(450, 80));
 
             // Imagen desde Pokedex
-            Integer id = Pokedex.pokedex.get(trainer.pokemons[i].getName());
+            Integer id = Pokedex.pokedex.get(trainer.getTeamArray()[i].getName());
             if (id != null) {
                 String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
                 try {
@@ -38,12 +38,12 @@ public class ShowPokemons extends JScrollPane {
                     JLabel iconLabel = new JLabel(new ImageIcon(scaledImage));
                     pokemonPanel.add(iconLabel, BorderLayout.WEST);
                 } catch (Exception ex) {
-                    System.out.println("Error cargando imagen para " + trainer.pokemons[i].getName() + ": " + ex.getMessage());
+                    System.out.println("Error cargando imagen para " + trainer.getTeamArray()[i].getName() + ": " + ex.getMessage());
                 }
             }
 
             // Info del Pokémon
-            JLabel infoLabel = new JLabel("Nombre: " + trainer.pokemons[i].getName() + ", Tipo: " + trainer.pokemons[i].getType() + ", Vida: " + trainer.pokemons[i].getHealth());
+            JLabel infoLabel = new JLabel("Nombre: " + trainer.getTeamArray()[i].getName() + ", Tipo: " + trainer.getTeamArray()[i].getType() + ", Vida: " + trainer.getTeamArray()[i].getHealth());
             infoLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 12));
             pokemonPanel.add(infoLabel, BorderLayout.CENTER);
 
@@ -52,7 +52,7 @@ public class ShowPokemons extends JScrollPane {
             botonElegir.setPreferredSize(new Dimension(100, 30));
             int index = i;
             botonElegir.addActionListener(e -> {
-                if(trainer.pokemons[index].isAlive() == false){
+                if(trainer.getTeamArray()[index].isAlive() == false){
                     JOptionPane.showMessageDialog(null, "no se puede escoger a un pokemon muerto escoge a uno de nuevo");
                     return;
                 }
