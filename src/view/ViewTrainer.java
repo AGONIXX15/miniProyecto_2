@@ -119,7 +119,7 @@ public class ViewTrainer extends JFrame {
                     ReproduceSound reproduceSound = new ReproduceSound();
                     reproduceSound.loadSound("src/models/pokemon/utils/ready-fight-37973.wav");
                     reproduceSound.playSound();
-                    Timer t = new Timer(4000, event -> {
+                    Timer t = new Timer(1000, event -> {
                         setVisible(false);
                         new BattlePokemonGUI(trainer1, trainer2);
                     });

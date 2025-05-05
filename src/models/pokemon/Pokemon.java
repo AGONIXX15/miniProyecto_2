@@ -87,15 +87,6 @@ public class Pokemon {
                 .append(", Salud = ").append(health);
 
 
-        /*for (Attack attack : attacks) {
-            if (attack != null) {
-                sb.append("\n  • ").append(attack.getName())
-                        .append(" (").append(attack.getPower())
-                        .append(" de poder, tipo: ").append(attack.getTypeDamage()).append(")");
-            }
-         */
-
-
         return sb.toString();
 
 
@@ -107,11 +98,6 @@ public class Pokemon {
 
     public void takeDamage(int damage) {
         health = Math.max(0, health-damage);
-        BattlePokemonGUI.getInstance().putMessage(String.format("%s Recibio %d de daño \n", name, damage));
-        BattlePokemonGUI.getInstance().putMessage(String.format("%s Tiene una vida de %d/%d \n", name, health, healthMax));
-        if (health == 0){
-            BattlePokemonGUI.getInstance().putMessage(String.format("%s Ha sido derrotado...\n", name));
-        }
     }
 
     public boolean hasAdvantage(Pokemon enemy){
