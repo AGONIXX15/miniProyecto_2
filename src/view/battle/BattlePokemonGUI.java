@@ -168,6 +168,7 @@ public class BattlePokemonGUI extends JFrame {
 
 
 
+
         mainPanel.add(bar1, Integer.valueOf(2));
         mainPanel.add(bar2, Integer.valueOf(2));
     }
@@ -270,8 +271,8 @@ public class BattlePokemonGUI extends JFrame {
         if (labelPokemon2 != null) mainPanel.remove(labelPokemon2);
 
 
-        labelPokemon1 = createPokemonImageLabel(pokemon1.getImagenUrl(), 350, 400, 200, 200); // lado izquierdo
-        labelPokemon2 = createPokemonImageLabel(pokemon2.getImagenUrl(), 1050, 200, 200, 200); // lado derecho
+        labelPokemon1 = createPokemonImageLabel(pokemon1.getImagenUrl(), 1050, 200, 200, 200); // lado izquierdo
+        labelPokemon2 = createPokemonImageLabel(pokemon2.getImagenUrl(),350, 400, 200, 200 ); // lado derecho
 
         mainPanel.add(labelPokemon1, Integer.valueOf(2));
         mainPanel.add(labelPokemon2, Integer.valueOf(2));
