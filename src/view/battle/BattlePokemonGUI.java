@@ -41,7 +41,7 @@ public class BattlePokemonGUI extends JFrame {
         messageBattle = new MessageBattle();
         messageBattle.getCard().show(messageBattle, "vacio");
         // acomodar esto
-        messageBattle.setBounds(1000,800,200,200);
+        messageBattle.setBounds(800,600,200,200);
 
         mainPanel = new JLayeredPane();
         mainPanel.setSize(1000, 1000);
@@ -63,7 +63,7 @@ public class BattlePokemonGUI extends JFrame {
         setLayout(null);
         setTitle("Battle Pokemon");
         setContentPane(mainPanel);
-        setSize(1000, 1000);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
@@ -101,14 +101,14 @@ public class BattlePokemonGUI extends JFrame {
         }
         if (turno % 2 == 0) {
             bar1 = new PokemonStatusBar(pokemon1.getName(), pokemon1.getHealth(), pokemon1.getHealthMax());
-            bar1.setBounds(600, 400,600,300);
+            bar1.setBounds(1000, 200,300,80);
             bar2 = new PokemonStatusBar(pokemon2.getName(), pokemon2.getHealth(), pokemon2.getHealthMax());
-            bar2.setBounds(150, 200,600,300);
+            bar2.setBounds(150, 400,300,80);
         } else {
             bar1 = new PokemonStatusBar(pokemon1.getName(), pokemon1.getHealth(), pokemon1.getHealthMax());
-            bar1.setBounds(1000, 200,600,300);
+            bar1.setBounds(150, 400,300,80);
             bar2 = new PokemonStatusBar(pokemon2.getName(), pokemon2.getHealth(), pokemon2.getHealthMax());
-            bar2.setBounds(50, 400,600,300);
+            bar2.setBounds(1000, 200,300,80);
         }
 
 
@@ -118,7 +118,7 @@ public class BattlePokemonGUI extends JFrame {
 
     public void putMessage(String message){
         messageBattle.getCard().show(messageBattle, "textArea");
-        messageBattle.setMessage(message);
+        messageBattle.enqueueMessage(message);
         messageBattle.revalidate();
         messageBattle.repaint();
     }
@@ -170,7 +170,7 @@ public class BattlePokemonGUI extends JFrame {
         } else {
             attacksButtons = new PokemonAttacksButtons(pokemon2.getAttacks());
         }
-        attacksButtons.setBounds(700, 800, 200, 200);
+        attacksButtons.setBounds(600, 600, 200, 200);
         mainPanel.add(attacksButtons, Integer.valueOf(2));
         mainPanel.revalidate();
         mainPanel.repaint();
