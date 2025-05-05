@@ -117,4 +117,8 @@ public class Trainer {
         }
         this.pokemons = temp;
     }
+
+    public Pokemon[] getTeamArray() {
+        return team;
+    }
 }
