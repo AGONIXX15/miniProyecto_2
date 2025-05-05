@@ -14,7 +14,7 @@ public class BattleTrainer {
 
 
     public static boolean trainerHasLost(Trainer trainer) {
-        for(Pokemon pokemon: trainer.team){
+        for(Pokemon pokemon: trainer.getTeamArray()){
             if(pokemon.isAlive()){
                 return false;
             }

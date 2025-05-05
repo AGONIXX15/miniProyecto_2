@@ -26,6 +26,7 @@ public class BattlePokemonGUI extends JFrame {
     private PokemonAttacksButtons attacksButtons;
     private MessageBattle messageBattle;
     private JLabel labelPokemon1, labelPokemon2,turnoLabel;
+    private ReproduceSound sound;
 
 
 
@@ -104,7 +105,7 @@ public class BattlePokemonGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         //reproducir sonido
-        ReproduceSound sound = new ReproduceSound();
+        sound = new ReproduceSound();
         sound.loadSound("src/models/pokemon/utils/Voicy_Pokemon GO OST_ Battle.wav");
         sound.loopSound();
     }
@@ -126,13 +127,18 @@ public class BattlePokemonGUI extends JFrame {
 
     public void chooseTrainerPokemon() {
         if(BattleTrainer.trainerHasLost(trainer1)){
-            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            System.out.println("entraste aqui");
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s", trainer2.getNameTrainer()));
             setVisible(false);
+            sound.stopSound();
             return;
         }
         if (BattleTrainer.trainerHasLost(trainer2)){
-            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            System.out.println("o aqui");
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s", trainer1.getNameTrainer()));
             setVisible(false);
+            sound.stopSound();
+            return;
         }
         if (!trainer1Active){
             pokemon2 = trainer2.getTeamArray()[((ShowPokemons) p1.getComponent(1)).getChoose()];
