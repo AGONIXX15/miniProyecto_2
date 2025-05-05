@@ -4,6 +4,7 @@ import battle.BattleTrainer;
 import models.Trainer;
 import models.pokemon.Pokemon;
 import models.pokemon.utils.Attack;
+import models.pokemon.utils.ReproduceSound;
 import models.pokemon.utils.TypePokemon;
 import utils.AttackFactory;
 
@@ -24,6 +25,8 @@ public class BattlePokemonGUI extends JFrame {
     private static BattlePokemonGUI instance;
     private boolean trainer1Active;
     private int turno;
+
+
 
 
     public static BattlePokemonGUI getInstance() {
@@ -66,6 +69,10 @@ public class BattlePokemonGUI extends JFrame {
         setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        //reproducir sonido
+        ReproduceSound sound = new ReproduceSound();
+        sound.loadSound("src/models/pokemon/utils/Voicy_Pokemon GO OST_ Battle.wav");
+        sound.loopSound();
     }
 
     public void chooseAgain(){
@@ -194,37 +201,4 @@ public class BattlePokemonGUI extends JFrame {
     public void combat(){
     }
 
-    public static void main(String[] args) {
-        Pokemon []pokemon1 = new Pokemon[]{
-                new Pokemon("Bulbasaur", 100, TypePokemon.PLANTA, new Attack[]{
-                        AttackFactory.VINE_WHIP, AttackFactory.SOLAR_BEAM, AttackFactory.RAZOR_LEAF, AttackFactory.TACKLE
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"),
-
-                new Pokemon("Pikachu", 90, TypePokemon.ELECTRICO, new Attack[]{
-                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"),
-
-                new Pokemon("Arcanine", 110, TypePokemon.FUEGO, new Attack[]{
-                        AttackFactory.FIRE_BLAST, AttackFactory.FLAMETHROWER, AttackFactory.QUICK_ATTACK, AttackFactory.TACKLE
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png")
-        };
-
-        Pokemon []pokemon2 = new Pokemon[]{
-                new Pokemon("Scyther", 100, TypePokemon.PLANTA, new Attack[]{
-                        AttackFactory.LEAF_BLADE, AttackFactory.SLASH, AttackFactory.DOUBLE_KICK, AttackFactory.TACKLE
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png"),
-
-                new Pokemon("Electabuzz", 95, TypePokemon.ELECTRICO, new Attack[]{
-                        AttackFactory.THUNDERBOLT, AttackFactory.THUNDER, AttackFactory.SHOCK_WAVE, AttackFactory.QUICK_ATTACK
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png"),
-
-                new Pokemon("Vulpix", 90, TypePokemon.FUEGO, new Attack[]{
-                        AttackFactory.FLAMETHROWER, AttackFactory.FIRE_BLAST, AttackFactory.TACKLE, AttackFactory.QUICK_ATTACK
-                }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png"),
-        };
-        Trainer trainer1 = new Trainer("sebas", pokemon1);
-        Trainer trainer2 = new Trainer("simon", pokemon2);
-        new BattlePokemonGUI(trainer1, trainer2);
-
-    }
 }

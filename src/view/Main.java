@@ -6,7 +6,7 @@ import models.pokemon.utils.TypePokemon;
 import utils.AttackFactory;
 
 import javax.swing.*;
-
+/**
 public class Main {
     public static void main(String[] args) {
         // Crear el arreglo de pokémon de prueba
@@ -82,4 +82,4 @@ public class Main {
         });
     }
 }
-
+**/
