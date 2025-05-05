@@ -55,7 +55,7 @@ public class BattlePokemonGUI extends JFrame {
         mainPanel = new JLayeredPane();
         mainPanel.setSize(1000, 1000);
 
-        turnoLabel = new JLabel(String.format("turno de: %s",(turno%2==0)?trainer1.getNameTrainer():trainer2.getNameTrainer()));
+        turnoLabel = new JLabel("");
         turnoLabel.setBounds(100, 700, 600, 80);
         turnoLabel.setFont(CustomFont.loadfont(50));
         turnoLabel.setForeground(Color.WHITE);
@@ -118,6 +118,15 @@ public class BattlePokemonGUI extends JFrame {
     }
 
     public void chooseTrainerPokemon() {
+        if(BattleTrainer.trainerHasLost(trainer1)){
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            setVisible(false);
+            return;
+        }
+        if (BattleTrainer.trainerHasLost(trainer2)){
+            JOptionPane.showMessageDialog(null, String.format("gano el entrenador %s"));
+            setVisible(false);
+        }
         if (!trainer1Active){
             pokemon2 = trainer2.getTeamArray()[((ShowPokemons) p1.getComponent(1)).getChoose()];
             System.out.println(pokemon2);
@@ -166,7 +175,6 @@ public class BattlePokemonGUI extends JFrame {
             System.out.println("turno movido: " + turno);
             removeThings();
             setThings();
-            updateLabel();
         }
 
     }
@@ -213,6 +221,7 @@ public class BattlePokemonGUI extends JFrame {
 
     public void setThings(){
         pokemonBars();
+        updateLabel();
         setAttacksButtons();
         addPokemonImages();
     }
@@ -287,7 +296,9 @@ public class BattlePokemonGUI extends JFrame {
                 }, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png"),
         };
         Trainer trainer1 = new Trainer("sebas", pokemon1);
+        trainer1.randomTeam();
         Trainer trainer2 = new Trainer("simon", pokemon2);
+        trainer2.randomTeam();
         new BattlePokemonGUI(trainer1, trainer2);
 
     }
