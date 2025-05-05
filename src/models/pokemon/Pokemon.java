@@ -13,6 +13,9 @@ public class Pokemon {
     private Attack[] attacks;
     private int healthMax;
     private int health;
+    private int defense;
+    private int specialDefense;
+    private int speed;
     public String imagenUrl;
 
 
@@ -26,13 +29,17 @@ public class Pokemon {
      * @param type    tipo del pokemon
      * @param attacks ataques del pokemon
      */
-    public Pokemon(String name, int healthMax, TypePokemon type, Attack[] attacks, String imagenUrl) {
+    public Pokemon(String name, int healthMax, TypePokemon type, Attack[] attacks,
+                   String imagenUrl, int defense, int specialDefense, int speed) {
         this.name = name;
         this.healthMax = healthMax;
         this.health = healthMax;
         this.type = type;
         this.attacks = attacks;
         this.imagenUrl = imagenUrl;
+        this.defense = defense;
+        this.specialDefense = specialDefense;
+        this.speed = speed;
     }
 
 
@@ -146,7 +153,7 @@ public class Pokemon {
     }
 
     public Pokemon clonar(){
-        return new Pokemon(name, healthMax, type, attacks,imagenUrl);
+        return new Pokemon(name, healthMax, type, attacks,imagenUrl,defense, specialDefense, speed);
     }
 }
 

@@ -2,6 +2,9 @@ package models.pokemon.utils;
 import javax.sound.sampled.*;
 import java.io.File;
 
+import javax.sound.sampled.*;
+import java.io.File;
+
 public class ReproduceSound {
     private Clip clip;
 
@@ -24,6 +27,15 @@ public class ReproduceSound {
         if (clip != null) {
             clip.setFramePosition(0);
             clip.start();
+        }
+    }
+
+    public void loopSound() {
+        if (clip != null) {
+            clip.setFramePosition(0);
+            FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-30.0f);
+            clip.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce sin parar
         }
     }
 
