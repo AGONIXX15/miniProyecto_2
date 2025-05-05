@@ -10,7 +10,7 @@ public class AttackFactory {
     public static final Attack WATER_GUN = new Attack("Pistola de Agua", (short) 35, TypeDamage.ESPECIAL);
     public static final Attack THUNDER = new Attack("Trueno", (short) 60, TypeDamage.ESPECIAL);
     public static final Attack RAZOR_LEAF = new Attack("Hoja Afilada", (short) 40, TypeDamage.FISICO);
-    public static final Attack VINE_WHIP = new Attack("Látigo Cepa", (short) 30, TypeDamage.FISICO);
+    public static final Attack VINE_WHIP = new Attack("Latigo Cepa", (short) 30, TypeDamage.FISICO);
     public static final Attack SOLAR_BEAM = new Attack("Rayo Solar", (short) 65, TypeDamage.ESPECIAL);
     public static final Attack TACKLE = new Attack("Placaje", (short) 20, TypeDamage.FISICO);
     public static final Attack DOUBLE_KICK = new Attack("Doble Patada", (short) 30, TypeDamage.FISICO);

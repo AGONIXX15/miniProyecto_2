@@ -1,4 +1,6 @@
 package view.battle;
+import utils.CustomFont;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class PokemonStatusBar extends JPanel {
     int y = 40;
     public PokemonStatusBar(String name, int hp, int maxHp) {
         setVisible(true);
-        setPreferredSize(new Dimension(width * 2,height * 2));
+        setOpaque(false);
         this.name = name;
         this.hp = hp;
         this.maxHp = maxHp;
@@ -52,9 +54,10 @@ public class PokemonStatusBar extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.setFont(CustomFont.loadfont(20f));
+        g.setColor(Color.WHITE);
         g.drawString(String.format("%s %d/%d HP", name, hp, maxHp), 10,30);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.fillRect(10,40, width, height);
         float percentage = (float) hp / (float) maxHp;
         if (percentage >= 0.7f) {
@@ -82,7 +85,7 @@ public class PokemonStatusBar extends JPanel {
     public static void main(String []args){
         JFrame frame = new JFrame("Pokemon Status Bar");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,500);
+        frame.setSize(230,120);
         frame.setLocationRelativeTo(null);
         PokemonStatusBar bar = new PokemonStatusBar("pikachu", 100, 100);
         frame.add(bar);
