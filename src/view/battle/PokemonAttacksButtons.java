@@ -2,6 +2,7 @@ package view.battle;
 import models.pokemon.Pokemon;
 import models.pokemon.utils.Attack;
 import utils.AttackFactory;
+import utils.CustomFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,10 @@ public class PokemonAttacksButtons extends JPanel {
         grid.setHgap(10);
         setLayout(new GridLayout(2,2));
         for(int i = 0; i < attacks.length; i++) {
-            JButton button = new JButton(String.format("%s, poder: %d\ntipo:%s", attacks[i].getName(), attacks[i].getPower(), attacks[i].getTypeDamage()));
+            JButton button = new JButton(String.format("%s", attacks[i].getName()));
+            button.setFont(CustomFont.loadfont(20)); // Tamaño 16, negrita
+            button.setForeground(Color.WHITE);                // Letras blancas
+            button.setBackground(new Color(173, 216, 230));
             int index = i;
             button.setPreferredSize(new Dimension(150, 150));
             button.addActionListener(e -> {
@@ -30,6 +34,7 @@ public class PokemonAttacksButtons extends JPanel {
 
             add(button);
         }
+
     }
 
     public int getAttack(){

@@ -6,6 +6,11 @@ import models.pokemon.Pokemon;
 import models.pokemon.utils.Attack;
 import models.pokemon.utils.TypePokemon;
 import utils.AttackFactory;
+import utils.CustomFont;
+
+import javax.imageio.ImageIO;
+import java.net.URL;
+import java.io.IOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +24,8 @@ public class BattlePokemonGUI extends JFrame {
     private PokemonStatusBar bar1, bar2;
     private PokemonAttacksButtons attacksButtons;
     private MessageBattle messageBattle;
+    private JLabel labelPokemon1, labelPokemon2,turnoLabel;
+
 
 
     private static BattlePokemonGUI instance;
@@ -38,21 +45,33 @@ public class BattlePokemonGUI extends JFrame {
         this.trainer1 = trainer1;
         this.trainer2 = trainer2;
 
+
+
         messageBattle = new MessageBattle();
         messageBattle.getCard().show(messageBattle, "vacio");
         // acomodar esto
-        messageBattle.setBounds(800,600,200,200);
+        messageBattle.setBounds(1000,600,200,200);
 
         mainPanel = new JLayeredPane();
         mainPanel.setSize(1000, 1000);
 
+        turnoLabel = new JLabel(String.format("turno de: %s",(turno%2==0)?trainer1.getNameTrainer():trainer2.getNameTrainer()));
+        turnoLabel.setBounds(100, 700, 600, 80);
+        turnoLabel.setFont(CustomFont.loadfont(50));
+        turnoLabel.setForeground(Color.WHITE);
+        mainPanel.add(turnoLabel);
+
+
         p1 = new JPanel();
         p1.setPreferredSize(new Dimension(500, 500));
+        p1.setOpaque(false);
         cards = new CardLayout();
         p1.setLayout(cards);
         p1.add(new ShowPokemons(trainer1), "trainer1");
         p1.add(new ShowPokemons(trainer2), "trainer2");
-        p1.add(new JPanel(), "vacio");
+        JPanel p2 = new JPanel();
+        p2.setOpaque(false);
+        p1.add(p2, "vacio");
         cards.show(p1, "trainer1");
         p1.setBounds(100, 100, 500, 500);
         p1.setVisible(true);
@@ -61,7 +80,22 @@ public class BattlePokemonGUI extends JFrame {
         mainPanel.add(messageBattle, Integer.valueOf(1));
         setVisible(true);
         setLayout(null);
-        setTitle("Battle Pokemon");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+
+        ImageIcon battleBackground = new ImageIcon("src/utils/images/battleBackground.jpg");
+        Image scaledImage = battleBackground.getImage().getScaledInstance(
+                screenSize.width, screenSize.height, Image.SCALE_SMOOTH);
+        ImageIcon scaledBackground = new ImageIcon(scaledImage);
+
+        JLabel backgroundLabel = new JLabel(scaledBackground);
+        backgroundLabel.setBounds(0, 0, screenSize.width, screenSize.height);
+
+        mainPanel.add(backgroundLabel, Integer.valueOf(0));
+
+
+
         setContentPane(mainPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +103,7 @@ public class BattlePokemonGUI extends JFrame {
     }
 
     public void chooseAgain(){
-        System.out.println("por si acaso");
+
         removeThings();
         mainPanel.remove(attacksButtons);
         pokemon1 = null;
@@ -77,6 +111,11 @@ public class BattlePokemonGUI extends JFrame {
         cards.show(p1, "trainer1");
     }
 
+
+    public void updateLabel(){
+        turnoLabel.setText(String.format("turno de: %s",(turno%2==0)?trainer1.getNameTrainer():trainer2.getNameTrainer()));
+
+    }
 
     public void chooseTrainerPokemon() {
         if (!trainer1Active){
@@ -99,17 +138,12 @@ public class BattlePokemonGUI extends JFrame {
             System.out.println("algo raro paso error");
             return;
         }
-        if (turno % 2 == 0) {
             bar1 = new PokemonStatusBar(pokemon1.getName(), pokemon1.getHealth(), pokemon1.getHealthMax());
-            bar1.setBounds(1000, 200,300,80);
+            bar1.setBounds(1000, 100,300,80);
             bar2 = new PokemonStatusBar(pokemon2.getName(), pokemon2.getHealth(), pokemon2.getHealthMax());
             bar2.setBounds(150, 400,300,80);
-        } else {
-            bar1 = new PokemonStatusBar(pokemon1.getName(), pokemon1.getHealth(), pokemon1.getHealthMax());
-            bar1.setBounds(150, 400,300,80);
-            bar2 = new PokemonStatusBar(pokemon2.getName(), pokemon2.getHealth(), pokemon2.getHealthMax());
-            bar2.setBounds(1000, 200,300,80);
-        }
+
+
 
 
         mainPanel.add(bar1, Integer.valueOf(2));
@@ -132,6 +166,7 @@ public class BattlePokemonGUI extends JFrame {
             System.out.println("turno movido: " + turno);
             removeThings();
             setThings();
+            updateLabel();
         }
 
     }
@@ -170,7 +205,7 @@ public class BattlePokemonGUI extends JFrame {
         } else {
             attacksButtons = new PokemonAttacksButtons(pokemon2.getAttacks());
         }
-        attacksButtons.setBounds(600, 600, 200, 200);
+        attacksButtons.setBounds(600, 600, 400, 200);
         mainPanel.add(attacksButtons, Integer.valueOf(2));
         mainPanel.revalidate();
         mainPanel.repaint();
@@ -179,6 +214,7 @@ public class BattlePokemonGUI extends JFrame {
     public void setThings(){
         pokemonBars();
         setAttacksButtons();
+        addPokemonImages();
     }
 
     /**
@@ -189,6 +225,34 @@ public class BattlePokemonGUI extends JFrame {
         mainPanel.remove(bar2);
         mainPanel.revalidate();
         mainPanel.repaint();
+        if (labelPokemon1 != null) mainPanel.remove(labelPokemon1);
+        if (labelPokemon2 != null) mainPanel.remove(labelPokemon2);
+    }
+
+    private JLabel createPokemonImageLabel(String imageUrl, int x, int y, int width, int height) {
+        try {
+            URL url = new URL(imageUrl);
+            Image image = ImageIO.read(url);
+            Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            JLabel label = new JLabel(new ImageIcon(scaledImage));
+            label.setBounds(x, y, width, height);
+            return label;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JLabel("No se pudo cargar imagen");
+        }
+    }
+
+    public void addPokemonImages() {
+        if (labelPokemon1 != null) mainPanel.remove(labelPokemon1);
+        if (labelPokemon2 != null) mainPanel.remove(labelPokemon2);
+
+
+        labelPokemon1 = createPokemonImageLabel(pokemon1.getImagenUrl(), 350, 400, 200, 200); // lado izquierdo
+        labelPokemon2 = createPokemonImageLabel(pokemon2.getImagenUrl(), 1050, 200, 200, 200); // lado derecho
+
+        mainPanel.add(labelPokemon1, Integer.valueOf(2));
+        mainPanel.add(labelPokemon2, Integer.valueOf(2));
     }
 
     public void combat(){

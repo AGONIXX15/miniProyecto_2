@@ -1,6 +1,7 @@
 package view.battle;
 
 import models.Trainer;
+import utils.CustomFont;
 import view.utils.Pokedex;
 
 import javax.imageio.ImageIO;
@@ -16,13 +17,16 @@ public class ShowPokemons extends JScrollPane {
         setPreferredSize(new Dimension(600, 600));
         this.trainer = trainer;
         JPanel panel = new JPanel();
+        panel.setOpaque(false);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(Color.white);
-        JLabel label = new JLabel(String.format("choose one pokemon trainer %s", trainer.getNameTrainer()));
+        JLabel label = new JLabel(String.format("Escoge un Pokemon %s", trainer.getNameTrainer() + ":"));
+        label.setForeground(Color.WHITE);
+        label.setFont(CustomFont.loadfont(20f));
         panel.add(label);
 
         for (int i = 0; i < trainer.getTeamArray().length; i++) {
             JPanel pokemonPanel = new JPanel(new BorderLayout());
+
             pokemonPanel.setBorder(BorderFactory.createLineBorder(Color.blue, 2));
             pokemonPanel.setBackground(Color.cyan);
             pokemonPanel.setPreferredSize(new Dimension(450, 80));
@@ -66,6 +70,9 @@ public class ShowPokemons extends JScrollPane {
         }
 
         setViewportView(panel);
+        setOpaque(false);
+        getViewport().setOpaque(false);
+        setBorder(null);
         setPreferredSize(new Dimension(500, 400));
         setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
         getVerticalScrollBar().setUnitIncrement(16);

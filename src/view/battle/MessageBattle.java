@@ -1,5 +1,7 @@
 package view.battle;
 
+import utils.CustomFont;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
@@ -15,6 +17,7 @@ public class MessageBattle extends JPanel {
     private Queue<String> messageQueue = new LinkedList<>();
     private boolean isShowingMessage = false;
 
+
     /**
      * este es el constructor de la clase de mensajes para nuestro juego
      */
@@ -23,13 +26,25 @@ public class MessageBattle extends JPanel {
         setLayout(card);
         setPreferredSize(new Dimension(300, 300));
         textArea = new JTextArea();
-        textArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
+        textArea.setFont(CustomFont.loadfont(20));
+        textArea.setForeground(Color.WHITE);
+        textArea.setOpaque(false);
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+        textArea.setPreferredSize(new Dimension(280, 120));
 
-        add(new JScrollPane(textArea), "textArea");
-        add(new JPanel(), "vacio");
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(null);
+        scrollPane.setPreferredSize(new Dimension(280, 120));
+
+        add(scrollPane, "textArea");
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        add(panel, "vacio");
+        setOpaque(false);
     }
 
     public void enqueueMessage(String newMessage) {
