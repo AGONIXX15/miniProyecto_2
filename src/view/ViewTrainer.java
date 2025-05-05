@@ -10,8 +10,9 @@ import java.net.URL;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import javax.swing.*;
+import view.utils.Pokedex;
+import view.battle.BattlePokemonGUI;
 
 
 public class ViewTrainer extends JFrame {
@@ -23,8 +24,10 @@ public class ViewTrainer extends JFrame {
     JButton iniciarBatalla, mostrarEquipo, asignarEntreadores;
     TextField entrenador1Texto, entrenador2Texto;
     Boolean entreadoresIntroduccidos,asignacionDeEquipos = false;
+    private boolean tried;
 
     public ViewTrainer() {
+        tried = false;
         setTitle("Seleccionar Entrenadores");
 
         ImageIcon fondoIcon,fondoBotonSeleccionar,fondoBotonAsignar,fondoBotonBatalla;
@@ -107,14 +110,23 @@ public class ViewTrainer extends JFrame {
 
         iniciarBatalla.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(entreadoresIntroduccidos && asignacionDeEquipos) {
+                if(entreadoresIntroduccidos && asignacionDeEquipos && !tried) {
+                    tried = true;
                     MainFrame.reproduceSound.stopSound(); // parar sonido de inicio
                     ReproduceSound reproduceSound = new ReproduceSound();
                     reproduceSound.loadSound("src/models/pokemon/utils/ready-fight-37973.wav");
                     reproduceSound.playSound();
+                    Timer t = new Timer(4000, event -> {
+                        setVisible(false);
+                        new BattlePokemonGUI(trainer1, trainer2);
+                    });
+                    t.setRepeats(false);
+                    t.start();
                     return;
                 }
-                JOptionPane.showMessageDialog(null, "ponga los entrenadores y asigne su equipo");
+                if (!tried){
+                    JOptionPane.showMessageDialog(null, "ponga los entrenadores y asigne su equipo");
+                }
 
             }
         });
@@ -143,31 +155,6 @@ public class ViewTrainer extends JFrame {
         UIManager.put("Button.background", new Color(205, 64, 64));
         UIManager.put("Button.foreground", Color.WHITE);
 
-        HashMap<String, Integer> pokedex = new HashMap<>();
-        pokedex.put("Charmander", 4);
-        pokedex.put("Squirtle", 7);
-        pokedex.put("Bulbasaur", 1);
-        pokedex.put("Pikachu", 25);
-        pokedex.put("Arcanine", 59);
-        pokedex.put("Scyther", 123);
-        pokedex.put("Electabuzz", 125);
-        pokedex.put("Zapdos", 145);
-        pokedex.put("Pidgeotto", 17);
-        pokedex.put("Fearow", 22);
-        pokedex.put("Moltres", 146);
-        pokedex.put("Vulpix", 37);
-        pokedex.put("Magmar", 126);
-        pokedex.put("Goldeen", 118);
-        pokedex.put("Seaking", 119);
-        pokedex.put("Bellsprout", 69);
-        pokedex.put("Weepinbell", 70);
-        pokedex.put("Jolteon",135);
-        pokedex.put("Seel", 86);
-        pokedex.put("Doduo", 84);
-        pokedex.put("Magnemite",81);
-        pokedex.put("Farfetch'd",83);
-        pokedex.put("Psyduck",54);
-        pokedex.put("Exeggcute",102);
 
 
         PokemonFactory cargasEquipos = new PokemonFactory();
@@ -193,7 +180,7 @@ public class ViewTrainer extends JFrame {
             pokemonPanel.setBackground(Color.cyan); // Fondo blanco (opcional)
             pokemonPanel.setPreferredSize(new Dimension(450, 70)); // Tamaño fijo opcional
 
-            Integer id = pokedex.get(p.getName());
+            Integer id = Pokedex.pokedex.get(p.getName());
             if (id != null) {
                 String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
                 try {
@@ -227,7 +214,7 @@ public class ViewTrainer extends JFrame {
             pokemonPanel.setBackground(new Color(205, 64, 64)); // Fondo blanco (opcional)
             pokemonPanel.setPreferredSize(new Dimension(450, 70)); // Tamaño fijo opcional
 
-            Integer id = pokedex.get(p.getName());
+            Integer id = Pokedex.pokedex.get(p.getName());
             if (id != null) {
                 String imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
                 try {
