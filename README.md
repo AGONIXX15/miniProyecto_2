@@ -1,7 +1,7 @@
 # MiniProyecto #2
 
 >*Repositorio MiniProyecto #2- Programacion Orientada a Eventos-50*
-**Poryecto de Juego de pokemon con interfaz grafica**
+**Proyecto de Juego de pokemon con interfaz grafica**
 
 ***Integrantes:***
 
