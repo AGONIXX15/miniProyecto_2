@@ -80,7 +80,7 @@ public class BattlePokemonGUI extends JFrame {
 
     public void chooseTrainerPokemon() {
         if (!trainer1Active){
-            pokemon2 = trainer2.pokemons[((ShowPokemons) p1.getComponent(1)).getChoose()];
+            pokemon2 = trainer2.getTeamArray()[((ShowPokemons) p1.getComponent(1)).getChoose()];
             System.out.println(pokemon2);
             trainer1Active = true;
             cards.show(p1, "vacio");
@@ -88,7 +88,7 @@ public class BattlePokemonGUI extends JFrame {
             setThings();
             return;
         }
-        pokemon1 = trainer1.pokemons[((ShowPokemons)p1.getComponent(0)).getChoose()];
+        pokemon1 = trainer1.getTeamArray()[((ShowPokemons)p1.getComponent(0)).getChoose()];
         System.out.println(pokemon1);
         cards.show(p1, "trainer2");
         trainer1Active = false;

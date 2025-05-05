@@ -90,8 +90,6 @@ public class ViewTrainer extends JFrame {
         asignarEntreadores.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AlertasignarEquipo();
-
-
             }
         });
 
